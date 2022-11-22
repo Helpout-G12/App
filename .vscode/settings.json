@@ -3,7 +3,7 @@
         "bash": {
             "path": "bash",
             "icon": "terminal-bash",
-            "args": ["--init-file", "./start.sh"]
+            "args": ["--init-file", "./.vscode/start.sh"]
         },
     }
 }
