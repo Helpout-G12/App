@@ -1,24 +1,29 @@
-/**
- * If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
- * https://reactnavigation.org/docs/getting-started
- *
- */
-import { FontAwesome } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
+import { FontAwesome } from '@expo/vector-icons';
 import { ColorSchemeName, Pressable } from 'react-native';
-import Dashboard from '../components/UI/Dashboard';
-
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import ModalScreen from '../screens/ModalScreen';
-import NotFoundScreen from '../screens/NotFoundScreen';
-import MoodTrackerScreen from '../screens/MoodTrackerScreen';
-import JournalScreen from '../screens/JournalScreen';
+
+/* If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
+ * https://reactnavigation.org/docs/getting-started
+ */
+import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+
+// Screens
+import NotFoundScreen from '../screens/NotFoundScreen';
+import ModalScreen from '../screens/ModalScreen';
+import About from '../screens/AboutScreen';
+import Profile from '../screens/ProfileScreen';
+
+import DashboardScreen from '../screens/DashboardScreen';
+import MoodTrackerScreen from '../screens/MoodTrackerScreen';
+import JournalScreen from '../screens/JournalScreen';
+
+// Components
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -42,6 +47,8 @@ function RootNavigator() {
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
+        <Stack.Screen name="About" component={About} options={{ title: 'About' }} />
+        <Stack.Screen name="Profile" component={Profile} options={{ title: 'Profile' }} />
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
     </Stack.Navigator>
@@ -56,7 +63,7 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
-  
+
   return (
     <BottomTab.Navigator
       initialRouteName="Dashboard"
@@ -64,15 +71,27 @@ function BottomTabNavigator() {
     >
       <BottomTab.Screen
         name="Dashboard"
-        component={Dashboard}
+        component={DashboardScreen}
         options={({ route, navigation }: RootTabScreenProps<'Dashboard'>) => ({
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           title: 'Dashboard',
           headerTitleAlign: 'center',
           headerTransparent: true,
+          headerLeft: () => (
+            <Pressable
+              onPress={() => navigation.navigate('Profile')}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}>
+              <FontAwesome name="user-circle" size={24} color="black" />
+            </Pressable>
+          ),
+          headerLeftContainerStyle: {
+            marginLeft: 15,
+          },
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate('Modal')}
+              onPress={() => navigation.navigate('About')}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}>
@@ -93,6 +112,8 @@ function BottomTabNavigator() {
         options={({ navigation }: RootTabScreenProps<'MoodTracker'>) => ({
           title: 'Mood Tracker',
           tabBarIcon: ({ color }) => <TabBarIcon name="smile-o" color={color} />,
+          headerTitleAlign: 'center',
+          headerTransparent: true,
         })}
       />
       <BottomTab.Screen
@@ -101,6 +122,8 @@ function BottomTabNavigator() {
         options={{
           title: 'Journal',
           tabBarIcon: ({ color }) => <TabBarIcon name="calendar" color={color} />,
+          headerTitleAlign: 'center',
+          headerTransparent: true,
         }}
       />
     </BottomTab.Navigator>
