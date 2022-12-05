@@ -9,13 +9,14 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable } from 'react-native';
+import Dashboard from '../components/UI/Dashboard';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import MoodTrackerScreen from '../screens/MoodTrackerScreen';
+import JournalScreen from '../screens/JournalScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -55,18 +56,20 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
-
+  
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Dashboard"
       screenOptions={{ tabBarActiveTintColor: Colors[colorScheme].tint }}
     >
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Mood Tracker',
-          tabBarIcon: ({ color }) => <TabBarIcon name="smile-o" color={color} />,
+        name="Dashboard"
+        component={Dashboard}
+        options={({ route, navigation }: RootTabScreenProps<'Dashboard'>) => ({
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          title: 'Dashboard',
+          headerTitleAlign: 'center',
+          headerTransparent: true,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -83,9 +86,18 @@ function BottomTabNavigator() {
           ),
         })}
       />
+
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="MoodTracker"
+        component={MoodTrackerScreen}
+        options={({ navigation }: RootTabScreenProps<'MoodTracker'>) => ({
+          title: 'Mood Tracker',
+          tabBarIcon: ({ color }) => <TabBarIcon name="smile-o" color={color} />,
+        })}
+      />
+      <BottomTab.Screen
+        name="Journal"
+        component={JournalScreen}
         options={{
           title: 'Journal',
           tabBarIcon: ({ color }) => <TabBarIcon name="calendar" color={color} />,

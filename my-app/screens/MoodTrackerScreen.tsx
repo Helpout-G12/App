@@ -1,15 +1,13 @@
 import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+import { MoodTracker } from '../components/UI/MoodTracker';
+import { TText, TView } from '../components/utils/Themed';
 import { RootTabScreenProps } from '../types';
 
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function MoodTrackerScreen({ navigation }: RootTabScreenProps<'MoodTracker'>) {
   return (
-    <View style={styles.container}>
-      {/* //TODO make the mood Tracker */}
-      
-    </View>
+    <TView style={styles.container}>
+      <MoodTracker />
+    </TView>
   );
 }
 

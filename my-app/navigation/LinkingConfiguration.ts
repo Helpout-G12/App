@@ -11,14 +11,14 @@ import { RootStackParamList } from '../types';
 
 const root_linking = {
   screens: {
-    TabOne: {
+    MoodTracker: {
       screens: {
-        TabOneScreen: 'one',
+        MoodTrackerScreen: 'one',
       },
     },
-    TabTwo: {
+    Journal: {
       screens: {
-        TabTwoScreen: 'two',
+        JournalScreen: 'two',
       },
     },
   },

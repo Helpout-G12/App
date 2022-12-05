@@ -1,13 +1,12 @@
 import { StyleSheet } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+import { TText, TView } from '../components/utils/Themed';
 
-export default function TabTwoScreen() {
+export default function JournalScreen() {
   return (
-    <View style={styles.container}>
+    <TView style={styles.container}>
       {/* TODO make the Journal */}
-    </View>
+    </TView>
   );
 }
 

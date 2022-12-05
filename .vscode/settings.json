@@ -5,5 +5,25 @@
             "icon": "terminal-bash",
             "args": ["--init-file", ".vscode/start.sh"]
         },
+    },
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell",
+            "args": ["-NoLogo", "-NoExit", "-Command", ".vscode\\start.ps1"]
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": ["/k", ".vscode\\start.bat"],
+            "icon": "terminal-cmd"
+        },
+        "Git Bash": {
+            "source": "Git Bash",
+            "icon": "terminal-bash",
+            "args": ["--init-file", ".vscode/start.sh"]
+        }
     }
 }
