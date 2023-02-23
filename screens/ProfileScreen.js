@@ -1,65 +1,24 @@
-import { StyleSheet, Text, View } from 'react-native';
+import {useContext, useEffect} from 'react'
+import AuthContext from "../contexts/Auth";
+import { Button, StyleSheet, Text, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 
-export default function Profile() {
+const ProfileScreen = () => {
+	const navigation = useNavigation()
+	const { userToken, setUserToken } = useContext(AuthContext)
+	useEffect(() => {
+		if (!userToken) {
+			navigation.navigate('Login')
+		}
+	}, [userToken])
   return (
-    <View style={styles.container}>
-      <SignIn />
-      <SignUp />
-    </View>
-  )
+		<View>
+			<Text>Profile Screen</Text>
+			<Button title="Logout" onPress={() => setUserToken(null)} />
+		</View>
+	)
 }
 
-function SignUp() {
-  return (
-    <View style={{ ...styles.button, ...styles.signup }}>
-      <Text style={{ ...styles.title, ...styles.signup }}>Sign Up</Text>
-    </View>
-  )
-}
+export default ProfileScreen
 
-function SignIn() {
-  return (
-    <View style={{ ...styles.button, ...styles.signin }}>
-      <Text style={{ ...styles.title, ...styles.signin }}>Sign In</Text>
-    </View>
-  )
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-  },
-  button: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
-    maxWidth: 200,
-    margin: 20,
-    padding: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 10,
-    elevation: 5,
-  },
-  signup: {
-    backgroundColor: 'white',
-    color: 'blue',
-  },
-  signin: {
-    backgroundColor: 'blue',
-    color: 'white',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-})
-
+const styles = StyleSheet.create({})

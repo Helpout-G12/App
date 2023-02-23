@@ -1,18 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet } from 'react-native';
-
-import AboutUs from './AboutScreen';
+import { StyleSheet } from 'react-native';
 import { Text, View } from 'native-base';
 
 export default function ModalScreen() {
   return (
     <View style={styles.container}>
-      <AboutUs />
-      {/* Use a light status bar on iOS to account for the black space above the modal */}
-      <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
+      <Text color={"blue.300"} borderColor={"black"} fontSize={"3xl"}>
+        This is a testing modal screen
+      </Text>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

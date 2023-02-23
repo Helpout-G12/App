@@ -16,6 +16,7 @@ const linking = {
     screens: {
       NotFound: '*',
       Modal: 'modal',
+      Login: 'login',
       Profile: 'profile',
       About: 'about',
       Root: {

@@ -60,4 +60,9 @@ PREFER fontawesome icons from the fontawesome library over react-native-vector-i
 
         The MAIN APP is wrapped in a SafeAreaProvider from react-native-safe-area-context.
 
-        All other components are wrapped in a SafeAreaView from react-native-safe-area-context, which consumes the SafeAreaProvider from the main app.
+        All other components should be wrapped in a SafeAreaView from react-native-safe-area-context, which consumes the SafeAreaProvider from the main app.
+
+## STYLING
+
+Always prefer to use styles on a component that you can be sure will get rendered.
+Example: (see navigation/index.js) Navigator.Screen#options.headerLeftContainerStyle is supposed to style the container of the headerLeft component, but it does not work. So, instead of using it, I used the style prop on the headerLeft component itself, in this case, the Pressable component.

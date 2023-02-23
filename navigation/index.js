@@ -1,8 +1,6 @@
 import * as React from 'react';
-import { FontAwesome } from '@expo/vector-icons';
-import { Pressable } from 'react-native';
-import Colors from '../constants/Colours';
-import { useColorScheme } from 'react-native';
+import { Pressable } from 'native-base';
+import { useColors } from '../hooks/useColors';
 
 /* If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
  * https://reactnavigation.org/docs/getting-started
@@ -17,10 +15,19 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import ModalScreen from '../screens/ModalScreen';
 import About from '../screens/AboutScreen';
 import Profile from '../screens/ProfileScreen';
+import Login from '../screens/LoginScreen';
 
 import DashboardScreen from '../screens/DashboardScreen';
 import MoodTrackerScreen from '../screens/MoodTrackerScreen';
 import JournalScreen from '../screens/JournalScreen';
+
+//Icons
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons/faHome';
+import { faSmile } from '@fortawesome/free-regular-svg-icons/faSmile';
+import { faCalendar } from '@fortawesome/free-regular-svg-icons/faCalendar';
+import { faUserCircle } from '@fortawesome/free-regular-svg-icons';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
 
 // Components
 
@@ -42,9 +49,17 @@ const Stack = createNativeStackNavigator();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      initialRouteName="Login"
+      screenOptions={{
+        // When logging out, a pop animation feels intuitive
+        // You can remove this if you want the default 'push' animation
+        animation: 'slide_from_bottom',
+      }}
+    >
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+      <Stack.Screen name="Login" component={Login} options={{ title: 'Login' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="About" component={About} options={{ title: 'About' }} />
         <Stack.Screen name="Profile" component={Profile} options={{ title: 'Profile' }} />
@@ -61,50 +76,41 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator();
 
 function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
+  const colors = useColors();
 
   return (
     <BottomTab.Navigator
       initialRouteName="Dashboard"
-      screenOptions={{ tabBarActiveTintColor: Colors[colorScheme].tint }}
+      screenOptions={{
+        headerTransparent: true,
+        headerTitleStyle: { color: colors.contrast },
+        tabBarInactiveTintColor: colors.primary,
+        tabBarActiveTintColor: colors.primaryLight
+      }}
     >
       <BottomTab.Screen
         name="Dashboard"
         component={DashboardScreen}
-        options={({ route, navigation }) => ({
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+        options={({ navigation }) => ({
+          tabBarIcon: ({ color }) => <FontAwesomeIcon icon={faHome} size={30} color={color} />,
           title: 'Dashboard',
           headerTitleAlign: 'center',
-          headerTransparent: true,
           headerLeft: () => (
-            <Pressable
+            <Pressable ml={3}
               onPress={() => navigation.navigate('Profile')}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}>
-              <FontAwesome
-                name="user-circle"
-                size={25}
-                color="white"
-                style={{ marginLeft: 15 }}
-              />
+              <FontAwesomeIcon icon={faUserCircle} size={25} color={colors.contrast} />
             </Pressable>
           ),
-          headerLeftContainerStyle: {
-            marginLeft: 15,
-          },
           headerRight: () => (
-            <Pressable
+            <Pressable mr={3}
               onPress={() => navigation.navigate('About')}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}>
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
+              <FontAwesomeIcon icon={faInfoCircle} size={25} color={colors.contrast} />
             </Pressable>
           ),
         })}
@@ -115,7 +121,7 @@ function BottomTabNavigator() {
         component={MoodTrackerScreen}
         options={({ navigation }) => ({
           title: 'Mood Tracker',
-          tabBarIcon: ({ color }) => <TabBarIcon name="smile-o" color={color} />,
+          tabBarIcon: ({ color }) => <FontAwesomeIcon icon={faSmile} size={30} color={color} />,
           headerTitleAlign: 'center',
           headerTransparent: true,
         })}
@@ -125,18 +131,11 @@ function BottomTabNavigator() {
         component={JournalScreen}
         options={{
           title: 'Journal',
-          tabBarIcon: ({ color }) => <TabBarIcon name="calendar" color={color} />,
+          tabBarIcon: ({ color }) => <FontAwesomeIcon icon={faCalendar} size={30} color={color} />,
           headerTitleAlign: 'center',
           headerTransparent: true,
         }}
       />
     </BottomTab.Navigator>
   );
-}
-
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-function TabBarIcon(props) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }
