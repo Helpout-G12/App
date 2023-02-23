@@ -1,13 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { MoodTracker } from '../components/UI/MoodTracker';
-import { TText, TView } from '../components/utils/Themed';
-import { RootTabScreenProps } from '../types';
+// import { MoodTracker } from '../components/UI/MoodTracker';
+import { View } from 'native-base';
 
 export default function MoodTrackerScreen({ navigation }) {
   return (
-    <TView style={styles.container}>
-      <MoodTracker />
-    </TView>
+    <View style={styles.container}>
+      {/* <MoodTracker /> */}
+    </View>
   );
 }
 

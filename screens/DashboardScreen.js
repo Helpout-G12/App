@@ -1,7 +1,5 @@
 import { StyleSheet, SafeAreaView, StatusBar } from 'react-native'
-import { TText, TView } from '../components/utils/Themed'
-import {View } from 'react-native'
-import moment from 'moment';
+import { Text, View } from 'native-base'
 
 export default function DashboardScreen() {
   return (

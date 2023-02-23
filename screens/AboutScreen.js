@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 
-import { Text, View } from 'react-native';
+import { Text, View } from 'native-base';
 
 export default function About() {
 	const data = [
