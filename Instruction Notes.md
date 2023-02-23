@@ -1,3 +1,33 @@
+HOW TO GIT:
+
+    Clone the repo to your local machine.
+
+    DO NOT WORK ON THE MASTER BRANCH. IT IS PROTECTED.
+
+    Create a new branch for your work.
+
+        use `git checkout -b <branch-name>` to create a new branch and switch to it.
+
+    Commit your work to your branch.
+
+        use `git add .` to add all files to the staging area.
+        use `git commit -m "<commit-message>"` to commit your work.
+    
+    Push your branch to the remote repo.
+    
+        use `git push origin <branch-name>` to push your branch to the remote repo.
+    
+    Create a pull request to merge your branch to the master branch.
+    
+        go to the repo on github and click on the "Pull Requests" tab.
+        click on the "New Pull Request" button.
+        select your branch as the "compare" branch and the master branch as the "base" branch.
+        click on the "Create Pull Request" button.
+        wait for me to review your code and merge it to the master branch.
+    
+    DO NOT PUSH TO THE MASTER BRANCH. IT IS PROTECTED.
+
+
 USE SafeAreaView from @react-navigation/native or react-native-safe-area-context.
 DO NOT USE SafeAreaView from any other library
 
