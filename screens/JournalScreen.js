@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native';
 
-import { TText, TView } from '../components/utils/Themed';
+import { Text, View } from 'native-base';
 
 export default function JournalScreen() {
   return (
-    <TView style={styles.container}>
+    <View style={styles.container}>
       {/* TODO make the Journal */}
-    </TView>
+    </View>
   );
 }
 

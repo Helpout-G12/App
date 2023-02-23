@@ -2,15 +2,15 @@ import { StatusBar } from 'expo-status-bar';
 import { Platform, StyleSheet } from 'react-native';
 
 import AboutUs from './AboutScreen';
-import { TText, TView } from '../components/utils/Themed';
+import { Text, View } from 'native-base';
 
 export default function ModalScreen() {
   return (
-    <TView style={styles.container}>
+    <View style={styles.container}>
       <AboutUs />
       {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
-    </TView>
+    </View>
   );
 }
 

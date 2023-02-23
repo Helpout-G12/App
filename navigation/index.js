@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { Pressable } from 'react-native';
-import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
+import Colors from '../constants/Colours';
+import { useColorScheme } from 'react-native';
 
 /* If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
  * https://reactnavigation.org/docs/getting-started
