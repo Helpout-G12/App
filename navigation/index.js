@@ -17,9 +17,11 @@ import About from '../screens/AboutScreen';
 import Profile from '../screens/ProfileScreen';
 import Login from '../screens/LoginScreen';
 
+
 import DashboardScreen from '../screens/DashboardScreen';
 import MoodTrackerScreen from '../screens/MoodTrackerScreen';
 import JournalScreen from '../screens/JournalScreen';
+import ThoughtDiaryScreen from '../screens/ThoughtDiaryScreen';
 
 //Icons
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
