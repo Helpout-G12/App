@@ -5,7 +5,7 @@ import { View } from 'native-base';
 export default function MoodTrackerScreen({ navigation }) {
   return (
     <View flex={1}>
-      {/* <MoodTracker /> */}
+      This is the base component View
     </View>
   );
 }
