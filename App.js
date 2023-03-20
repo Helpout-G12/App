@@ -17,7 +17,7 @@ export default function App() {
           <AuthContext.Provider value={{ userToken, setUserToken }}>
             <Navigation colorScheme={colorScheme}/>
           </AuthContext.Provider>
-          <ExpoStatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+          <ExpoStatusBar style={'dark'} />
         </GestureHandlerRootView>
       </SafeAreaProvider>
     </NativeBaseProvider>

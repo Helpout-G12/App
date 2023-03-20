@@ -38,7 +38,7 @@ export default function Navigation({ colorScheme }) {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      theme={colorScheme === 'dark' ? DefaultTheme : DefaultTheme}>
       <RootNavigator />
     </NavigationContainer>
   );
@@ -53,7 +53,7 @@ const Stack = createNativeStackNavigator();
 function RootNavigator() {
   return (
     <Stack.Navigator
-      initialRouteName="Login"
+      initialRouteName="Root"
       screenOptions={{
         // When logging out, a pop animation feels intuitive
         // You can remove this if you want the default 'push' animation
@@ -83,12 +83,12 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="Dashboard"
+      initialRouteName="MoodTracker"
       screenOptions={{
         headerTransparent: true,
-        headerTitleStyle: { color: colors.contrast },
+        headerTitleStyle: { color: colors.text },
         tabBarInactiveTintColor: colors.primary,
-        tabBarActiveTintColor: colors.primaryLight
+        tabBarActiveTintColor: colors.text,
       }}
     >
       <BottomTab.Screen
@@ -104,7 +104,7 @@ function BottomTabNavigator() {
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}>
-              <FontAwesomeIcon icon={faUserCircle} size={25} color={colors.contrast} />
+              <FontAwesomeIcon icon={faUserCircle} size={25} color={colors.text} />
             </Pressable>
           ),
           headerRight: () => (
@@ -113,7 +113,7 @@ function BottomTabNavigator() {
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}>
-              <FontAwesomeIcon icon={faInfoCircle} size={25} color={colors.contrast} />
+              <FontAwesomeIcon icon={faInfoCircle} size={25} color={colors.text} />
             </Pressable>
           ),
         })}
@@ -126,7 +126,7 @@ function BottomTabNavigator() {
           title: 'Mood Tracker',
           tabBarIcon: ({ color }) => <FontAwesomeIcon icon={faSmile} size={30} color={color} />,
           headerTitleAlign: 'center',
-          headerTransparent: true,
+          headerShown: false,
         })}
       />
       <BottomTab.Screen
@@ -140,7 +140,7 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="Thought Diary"
+        name="ThoughtDiary"
         component={ThoughtDiaryScreen}
         options={{
           title: 'Thought Diary',
