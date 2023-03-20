@@ -28,6 +28,7 @@ import { faSmile } from '@fortawesome/free-regular-svg-icons/faSmile';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons/faCalendar';
 import { faUserCircle } from '@fortawesome/free-regular-svg-icons';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
+import { faBrain } from '@fortawesome/free-solid-svg-icons';
 
 // Components
 
@@ -136,6 +137,15 @@ function BottomTabNavigator() {
           headerTransparent: true,
         }}
       />
+      <BottomTab.Screen
+        name="Thought Diary"
+        component={ThoughtDiaryScreen}
+        options={{
+          title: 'Thought Diary',
+          tabBarIcon: ({ color }) => <FontAwesomeIcon icon={faBrain} size={30} color={color} />, // TODO: Change icon
+          headerTitleAlign: 'center',
+          headerTransparent: true,
+        }} />
     </BottomTab.Navigator>
   );
 }

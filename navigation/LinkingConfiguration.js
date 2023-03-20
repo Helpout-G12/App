@@ -36,6 +36,11 @@ const linking = {
               JournalScreen: 'journal',
             },
           },
+          ThoughtDiary: {
+            screens: {
+              ThoughtDiaryScreen: 'thought-diary',
+            },
+          },
         },
       },
     },
