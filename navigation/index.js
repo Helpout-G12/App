@@ -95,7 +95,7 @@ function BottomTabNavigator() {
         name="Dashboard"
         component={DashboardScreen}
         options={({ navigation }) => ({
-          tabBarIcon: ({ color }) => <FontAwesomeIcon icon={faHome} size={30} color={color} />,
+          tabBarIcon: ({ color }) => <FontAwesomeIcon icon={faHome} size={30} color={"#ff2324"} />,
           title: 'Dashboard',
           headerTitleAlign: 'center',
           headerLeft: () => (
