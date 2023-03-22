@@ -6,7 +6,6 @@ function saveIP(ip) {
   const fs = require('fs');
   const path = require('path');
   const envPath = path.resolve(__dirname, '.ip');
-  const env = fs.readFileSync(envPath, 'utf8');
   fs.writeFileSync(envPath, `REACT_NATIVE_PACKAGER_HOSTNAME=${ip}`, 'utf8');
 }
 
