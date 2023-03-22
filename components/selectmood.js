@@ -1,4 +1,4 @@
-import { Modal, Text, Button, SimpleGrid, Box, View } from "native-base";
+import { Modal, Text, Button, SimpleGrid, Box, View, Flex } from "native-base";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
@@ -39,7 +39,7 @@ const Selectmood = ({ open, hideMoodSelector }) => {
     {
       icon: faFaceKiss,
       color: "#454545",
-      text: "SuperHappy"
+      text: "Happy"
     },
     {
       icon: faFaceLaugh,
@@ -70,48 +70,16 @@ const Selectmood = ({ open, hideMoodSelector }) => {
         <Modal.Header>Test</Modal.Header>
         <Modal.Body>
           <Text>What are you feeling today?</Text>
-          <Box display={"flex"} flexDir={"row"} flexWrap={"wrap"}>
+          <Flex flexDir={"row"} flexWrap={"wrap"}>
             {emotions.map((emotion) => {
               return (
-                <View p={3}>
+                <Flex p={3} flexWrap={"wrap"} alignItems={"center"} flexGrow={1}>
                   <FontAwesomeIcon icon={emotion.icon} size={40} color={emotion.color} />
                   <Text>{emotion.text}</Text>
-                </View>
+                </Flex>
               );
             })}
-            {/* <View>
-              <FontAwesomeIcon icon={} size={40} color={"#454545"} />
-              <Text>Angry</Text>
-            </View>
-            <View>
-              <FontAwesomeIcon icon={} size={40} color={"#454545"} />
-              <Text>Numb</Text>
-            </View>
-            <View>
-              <FontAwesomeIcon icon={faFaceGrin} size={40} color={"#454545"} />
-              <Text>Happy</Text>
-            </View>
-            <View>
-              <FontAwesomeIcon
-                icon={faFaceFlushed}
-                size={40}
-                color={"#454545"}
-              />
-              <Text>Weird</Text>
-            </View>
-            <View>
-              <FontAwesomeIcon icon={faFaceKiss} size={40} color={"#400045"} />
-              <Text>Kisses</Text>
-            </View>
-            <View>
-              <FontAwesomeIcon icon={faFaceLaugh} size={40} color={"#454"} />
-              <Text>Laugh</Text>
-            </View>
-            <View>
-              <FontAwesomeIcon icon={faFaceSmile} size={40} color={"#ff0545"} />
-              <Text>Smile</Text>
-            </View> */}
-          </Box>
+          </Flex>
           <Button width="90%" mx={"auto"} mb={4}>
             <Text fontSize="lg" color="white">
               Continue
