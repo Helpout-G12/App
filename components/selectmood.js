@@ -5,6 +5,7 @@ import {
   faAngry,
   faFaceAngry,
   faFaceFlushed,
+  faFaceFrown,
   faFaceGrin,
   faFaceKiss,
   faFaceLaugh,
@@ -13,6 +14,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { faFaceDizzy, faFaceSurprise } from "@fortawesome/free-solid-svg-icons";
 import { text } from "@fortawesome/fontawesome-svg-core";
+import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 
 const Selectmood = ({ open, hideMoodSelector }) => {
   const emotions = [
@@ -39,7 +41,7 @@ const Selectmood = ({ open, hideMoodSelector }) => {
     {
       icon: faFaceKiss,
       color: "#454545",
-      text: "SuperHappy"
+      text: "Pleasant"
     },
     {
       icon: faFaceLaugh,
@@ -56,6 +58,24 @@ const Selectmood = ({ open, hideMoodSelector }) => {
       color: "#454545",
       text: "Smile"
     },
+    {
+      icon: faFaceSurprise,
+      color: "#454545",
+      text: "Surprise"
+    }
+    ,
+    {
+      icon: faFaceFrown,
+      color: "#454545",
+      text: "Frown"
+    }
+    ,
+    {
+      icon: faFacebook,
+      color: "#454545",
+      text: "Surprise"
+    }
+    ,
     {
       icon: faFaceSurprise,
       color: "#454545",
