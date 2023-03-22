@@ -9,8 +9,10 @@ import {
   faFaceGrin,
   faFaceKiss,
   faFaceLaugh,
+  faFaceMeh,
   faFaceSadCry,
   faFaceSmile,
+  faFaceSmileWink,
 } from "@fortawesome/free-regular-svg-icons";
 import { faFaceDizzy, faFaceSurprise } from "@fortawesome/free-solid-svg-icons";
 import { text } from "@fortawesome/fontawesome-svg-core";
@@ -71,15 +73,15 @@ const Selectmood = ({ open, hideMoodSelector }) => {
     }
     ,
     {
-      icon: faFacebook,
+      icon: faFaceSmileWink,
       color: "#454545",
-      text: "Surprise"
+      text: "Winky"
     }
     ,
     {
-      icon: faFaceSurprise,
+      icon: faFaceMeh,
       color: "#454545",
-      text: "Surprise"
+      text: "Confused"
     }
   ];
 
@@ -87,13 +89,13 @@ const Selectmood = ({ open, hideMoodSelector }) => {
     <Modal isOpen={open} onClose={hideMoodSelector} size="xl">
       <Modal.Content>
         <Modal.CloseButton></Modal.CloseButton>
-        <Modal.Header>Test</Modal.Header>
+        <Modal.Header>Mood Checker</Modal.Header>
         <Modal.Body>
-          <Text>What are you feeling today?</Text>
+          <Text fontWeight={"bold"} fontSize="xl">What are you feeling today?</Text>
           <Flex flexDir={"row"} flexWrap={"wrap"}>
             {emotions.map((emotion) => {
               return (
-                <Flex p={3} flexWrap={"wrap"} alignItems={"center"} flexGrow={1}>
+                <Flex p={3} alignItems={"center"} flexGrow={1} flexBasis="33%">
                   <FontAwesomeIcon icon={emotion.icon} size={40} color={emotion.color} />
                   <Text>{emotion.text}</Text>
                 </Flex>
