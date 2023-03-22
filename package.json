@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "AppEntry.js",
   "scripts": {
-    "wifi": "node pick-ip.js && npm start",
-    "start": "env-cmd expo start",
+    "prestart": "node pick-ip.js",
+    "start": "env-cmd -f .env -f .ip expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"

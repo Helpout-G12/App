@@ -1,30 +1,25 @@
 const os = require('os');
 const readline = require('readline');
 
-function setEnv(ip) {
-  //set env variable
-  process.env.REACT_NATIVE_PACKAGER_HOSTNAME = ip;
-
-  // update ip in .env file
+function saveIP(ip) {
+  // update ip in .ip file
   const fs = require('fs');
   const path = require('path');
-  const envPath = path.resolve(__dirname, '.env');
+  const envPath = path.resolve(__dirname, '.ip');
   const env = fs.readFileSync(envPath, 'utf8');
-  const newEnv = env?.replace(/(REACT_NATIVE_PACKAGER_HOSTNAME=).*/, `$1${ip}`);
-  fs.writeFileSync(envPath, newEnv, 'utf8');
+  fs.writeFileSync(envPath, `REACT_NATIVE_PACKAGER_HOSTNAME=${ip}`, 'utf8');
 }
 
 // Get list of network interfaces
 const networkInterfaces = os.networkInterfaces();
+const ips = Object.values(networkInterfaces).flat()
 
 // Find the first IPv4 address starting with "192."
-const ips = Object.values(networkInterfaces)
-  .flat()
 
 const wifi_ip = ips.find((iface) => iface.family === 'IPv4' && iface.address.startsWith('192.'));
 
 if (wifi_ip) {
-  setEnv(wifi_ip.address);
+  saveIP(wifi_ip.address);
   return;
 }
 //prompt user to pick ip
@@ -48,6 +43,5 @@ rl.question('Enter IP: ', (answer) => {
   const index = parseInt(answer, 10) - 1;
   const ip = ips.filter((iface) => iface.family === 'IPv4')[index].address;
   console.log(`Selected IP: ${ip}`);
-  setEnv(ip);
+  saveIP(ip);
 });
-
