@@ -23,66 +23,63 @@ const Selectmood = ({ open, hideMoodSelector }) => {
     {
       icon: faFaceAngry,
       color: "#454545",
-      text: "Angry"
+      text: "Angry",
     },
     {
       icon: faFaceDizzy,
       color: "#454545",
-      text: "Dizzy"
+      text: "Dizzy",
     },
     {
       icon: faFaceFlushed,
       color: "#454545",
-      text: "Flushed"
+      text: "Flushed",
     },
     {
       icon: faFaceGrin,
       color: "#454545",
-      text: "Grin"
+      text: "Grin",
     },
     {
       icon: faFaceKiss,
       color: "#454545",
-      text: "Pleasant"
+      text: "Pleasant",
     },
     {
       icon: faFaceLaugh,
       color: "#454545",
-      text: "Laugh"
+      text: "Laugh",
     },
     {
       icon: faFaceSadCry,
       color: "#454545",
-      text: "Sadcry"
+      text: "Sadcry",
     },
     {
       icon: faFaceSmile,
       color: "#454545",
-      text: "Smile"
+      text: "Smile",
     },
     {
       icon: faFaceSurprise,
       color: "#454545",
-      text: "Surprise"
-    }
-    ,
+      text: "Surprise",
+    },
     {
       icon: faFaceFrown,
       color: "#454545",
-      text: "Frown"
-    }
-    ,
+      text: "Frown",
+    },
     {
       icon: faFaceSmileWink,
       color: "#454545",
-      text: "Winky"
-    }
-    ,
+      text: "Winky",
+    },
     {
       icon: faFaceMeh,
       color: "#454545",
-      text: "Confused"
-    }
+      text: "Confused",
+    },
   ];
 
   return (
@@ -91,12 +88,24 @@ const Selectmood = ({ open, hideMoodSelector }) => {
         <Modal.CloseButton></Modal.CloseButton>
         <Modal.Header>Mood Checker</Modal.Header>
         <Modal.Body>
-          <Text fontWeight={"bold"} fontSize="xl">What are you feeling today?</Text>
+          <Text fontWeight={"bold"} fontSize="xl">
+            What are you feeling today?
+          </Text>
           <Flex flexDir={"row"} flexWrap={"wrap"}>
-            {emotions.map((emotion) => {
+            {emotions.map((emotion, i) => {
               return (
-                <Flex p={3} alignItems={"center"} flexGrow={1} flexBasis="33%">
-                  <FontAwesomeIcon icon={emotion.icon} size={40} color={emotion.color} />
+                <Flex
+                  key={i}
+                  p={3}
+                  alignItems={"center"}
+                  flexGrow={1}
+                  flexBasis="33%"
+                >
+                  <FontAwesomeIcon
+                    icon={emotion.icon}
+                    size={40}
+                    color={emotion.color}
+                  />
                   <Text>{emotion.text}</Text>
                 </Flex>
               );
