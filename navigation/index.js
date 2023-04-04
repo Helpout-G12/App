@@ -137,6 +137,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <FontAwesomeIcon icon={faCalendar} size={30} color={color} />,
           headerTitleAlign: 'center',
           headerTransparent: true,
+          headerShown: false,
         }}
       />
       <BottomTab.Screen
