@@ -7,36 +7,35 @@ import ThoughtScreen from "./ThoughtScreen";
 import Navigation from "../navigation";
 
 export default function ThoughtDiaryScreen() {
-  const ThoughtDiaryScreen = () => {
-    const showThoughtRecord = () => {
-      setopen(true);
-    };
-
-    const hideThoughtRecord = () => {
-      setopen(false);
-    };
-    const navigation = useNavigation();
-    return (
-      <SafeAreaView>
-        <ThoughtScreen open={open} hideThoughtRecord={hideThoughtRecord}>
-          <View style={styles.container}>
-            <TouchableOpacity activeOpacity={0.95} style={styles.button} />
-            <Button onPress={() => navigation.navigate("ThoughtScreen")}>
-              <Text style={{ color: "white", fontSize: 20 }}>
-                Enter a Thought Record
-              </Text>
-            </Button>
-            <Button>
-              <Text style={{ color: "white", fontSize: 20 }}>
-                See earlier records
-              </Text>
-            </Button>
-          </View>
-        </ThoughtScreen>
-      </SafeAreaView>
-    );
+  const showThoughtRecord = () => {
+    setopen(true);
   };
+
+  const hideThoughtRecord = () => {
+    setopen(false);
+  };
+  const navigation = useNavigation();
+  return (
+    <SafeAreaView>
+      <ThoughtScreen open={open} hideThoughtRecord={hideThoughtRecord}>
+        <View style={styles.container}>
+          <TouchableOpacity activeOpacity={0.95} style={styles.button} />
+          <Button onPress={() => navigation.navigate("ThoughtScreen")}>
+            <Text style={{ color: "white", fontSize: 20 }}>
+              Enter a Thought Record
+            </Text>
+          </Button>
+          <Button>
+            <Text style={{ color: "white", fontSize: 20 }}>
+              See earlier records
+            </Text>
+          </Button>
+        </View>
+      </ThoughtScreen>
+    </SafeAreaView>
+  );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
