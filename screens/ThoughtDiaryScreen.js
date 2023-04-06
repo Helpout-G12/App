@@ -5,33 +5,42 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ThoughtScreen from "./ThoughtScreen";
 import Navigation from "../navigation";
+import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
 
-export default function ThoughtDiaryScreen() {
-  const showThoughtRecord = () => {
+export default function ThoughtDiaryScreen({ navigation }) {
+  const [open, setopen] = useState(false);
+  const showThoughtRecorder = () => {
     setopen(true);
   };
 
-  const hideThoughtRecord = () => {
+  const hideThoughtRecorder = () => {
     setopen(false);
   };
-  const navigation = useNavigation();
+  const handleClick = () => {
+    showThoughtRecorder();
+    navigation.navigate("ThoughtScreen");
+  };
+
   return (
     <SafeAreaView>
-      <ThoughtScreen open={open} hideThoughtRecord={hideThoughtRecord}>
-        <View style={styles.container}>
-          <TouchableOpacity activeOpacity={0.95} style={styles.button} />
-          <Button onPress={() => navigation.navigate("ThoughtScreen")}>
-            <Text style={{ color: "white", fontSize: 20 }}>
-              Enter a Thought Record
-            </Text>
-          </Button>
-          <Button>
-            <Text style={{ color: "white", fontSize: 20 }}>
-              See earlier records
-            </Text>
-          </Button>
-        </View>
-      </ThoughtScreen>
+      <ThoughtScreen
+        open={open}
+        hideThoughtRecorder={hideThoughtRecorder}
+      ></ThoughtScreen>
+      <View style={styles.container}>
+        <TouchableOpacity activeOpacity={0.95} style={styles.button} />
+        <Button onPress={showThoughtRecorder}>
+          <Text style={{ color: "white", fontSize: 20 }}>
+            Enter a Thought Record
+          </Text>
+        </Button>
+        <Button>
+          <Text style={{ color: "white", fontSize: 20 }}>
+            See earlier records
+          </Text>
+        </Button>
+      </View>
     </SafeAreaView>
   );
 }
