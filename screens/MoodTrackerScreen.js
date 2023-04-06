@@ -34,6 +34,7 @@ export default function MoodTrackerScreen({ navigation }) {
       style: styleObj,
     });
   }, [myRef]);
+  
 
   return (
     <SafeAreaView>
@@ -60,10 +61,15 @@ export default function MoodTrackerScreen({ navigation }) {
         </View>
 
         <Calendar initialDate={new Date().toDateString()} 
-        markingType={'multi-dot'}
+        
+        markingType={'period'}
         markedDates={{
-          '2023-04-25': {dots: [vacation, massage, workout], selected: true, selectedColor: 'red'},
-          '2023-04-26': {dots: [massage, workout], disabled: true}
+          '2023-04-20': {textColor: 'blue'},
+          '2023-04-22': {startingDay: true, color: 'red', textColor: 'pink'},
+          '2023-04-23': {color: 'orange', textColor: 'pink', marked: true, disabled: true},
+          '2023-04-24': {selected: true, endingDay: true, color: 'yellow', textColor: 'blue'},
+          '2023-04-04': {disabled: true, startingDay: true, color: 'green', endingDay: true},
+          '2023-04-07': {disabled: true, color: 'red', marked: true}
         }}
        
         />
@@ -81,8 +87,23 @@ export default function MoodTrackerScreen({ navigation }) {
             }}
             ref={myRef}
           >
-            This is a Box
+            Here will be today's mood
           </Box>
+         <Box
+         width="100%"
+            bg="primary.500"
+            p="4"
+            mt="2.5"
+            shadow={2}
+            _text={{
+              fontSize: "md",
+              fontWeight: "bold",
+              color: "white",
+            }}
+            ref={myRef}
+          >
+            Here will be yesterday's mood
+         </Box>
         </View>
       </ScrollView>
     </SafeAreaView>
