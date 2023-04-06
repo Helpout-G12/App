@@ -1,21 +1,22 @@
 import { StyleSheet } from 'react-native';
 import { button,Text, View } from 'native-base';
-import react from "react";
-import { faCalendar } from '@fortawesome/free-regular-svg-icons/faCalendar';
-
-
+import React from "react";
 import {Button,Center} from "native-base";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { color} from "react-native-reanimated";
 export default function JournalScreen() {
+  const ddate = new Date();
   return (
-    
    
+         
           <View style={styles.container}>
+             <Text>Date : {ddate.toDateString()} </Text>
+             <View style={styles.container}>
             <TouchableOpacity activeOpacity={1.6} style={styles.button}>
               <Button>
-            <Text color={"Brown.500"} borderColor={"white"} fontSize={"4xl"}>
-              date:6-04-2023
+            <Text style={{color:"Yellow",borderColor:"white",marginbottom:"8",fontSize:25}}>
+              Prompted Journal
             </Text>
             </Button>
             <Button>
@@ -64,6 +65,9 @@ export default function JournalScreen() {
             </TouchableOpacity>
     
       </View>
+      </View>
+    
+      
   
   );
 }
