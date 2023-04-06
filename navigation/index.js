@@ -1,36 +1,39 @@
-import * as React from 'react';
-import { Pressable } from 'native-base';
-import { useColors } from '../hooks/useColors';
+import * as React from "react";
+import { Pressable } from "native-base";
+import { useColors } from "../hooks/useColors";
 
 /* If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
  * https://reactnavigation.org/docs/getting-started
  */
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import LinkingConfiguration from './LinkingConfiguration';
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import LinkingConfiguration from "./LinkingConfiguration";
 
 // Screens
-import NotFoundScreen from '../screens/NotFoundScreen';
-import ModalScreen from '../screens/ModalScreen';
-import About from '../screens/AboutScreen';
-import Profile from '../screens/ProfileScreen';
-import Login from '../screens/LoginScreen';
+import NotFoundScreen from "../screens/NotFoundScreen";
+import ModalScreen from "../screens/ModalScreen";
+import About from "../screens/AboutScreen";
+import Profile from "../screens/ProfileScreen";
+import Login from "../screens/LoginScreen";
 
-
-import DashboardScreen from '../screens/DashboardScreen';
-import MoodTrackerScreen from '../screens/MoodTrackerScreen';
-import JournalScreen from '../screens/JournalScreen';
-import ThoughtDiaryScreen from '../screens/ThoughtDiaryScreen';
-
+import DashboardScreen from "../screens/DashboardScreen";
+import MoodTrackerScreen from "../screens/MoodTrackerScreen";
+import JournalScreen from "../screens/JournalScreen";
+import ThoughtDiaryScreen from "../screens/ThoughtDiaryScreen";
+import ThoughtScreen from "../screens/ThoughtScreen";
 //Icons
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faHome } from '@fortawesome/free-solid-svg-icons/faHome';
-import { faSmile } from '@fortawesome/free-regular-svg-icons/faSmile';
-import { faCalendar } from '@fortawesome/free-regular-svg-icons/faCalendar';
-import { faUserCircle } from '@fortawesome/free-regular-svg-icons';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
-import { faBrain } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faHome } from "@fortawesome/free-solid-svg-icons/faHome";
+import { faSmile } from "@fortawesome/free-regular-svg-icons/faSmile";
+import { faCalendar } from "@fortawesome/free-regular-svg-icons/faCalendar";
+import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons/faInfoCircle";
+import { faBrain } from "@fortawesome/free-solid-svg-icons";
 
 // Components
 
@@ -38,7 +41,8 @@ export default function Navigation({ colorScheme }) {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DefaultTheme : DefaultTheme}>
+      theme={colorScheme === "dark" ? DefaultTheme : DefaultTheme}
+    >
       <RootNavigator />
     </NavigationContainer>
   );
@@ -57,16 +61,37 @@ function RootNavigator() {
       screenOptions={{
         // When logging out, a pop animation feels intuitive
         // You can remove this if you want the default 'push' animation
-        animation: 'slide_from_bottom',
+        animation: "slide_from_bottom",
       }}
     >
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Screen name="Login" component={Login} options={{ title: 'Login' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="About" component={About} options={{ title: 'About' }} />
-        <Stack.Screen name="Profile" component={Profile} options={{ title: 'Profile' }} />
+      <Stack.Screen
+        name="Root"
+        component={BottomTabNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="NotFound"
+        component={NotFoundScreen}
+        options={{ title: "Oops!" }}
+      />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{ title: "Login" }}
+      />
+      <Stack.Group screenOptions={{ presentation: "modal" }}>
+        <Stack.Screen
+          name="About"
+          component={About}
+          options={{ title: "About" }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{ title: "Profile" }}
+        />
         <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen name="ThoughtScreen" component={ThoughtScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -95,25 +120,39 @@ function BottomTabNavigator() {
         name="Dashboard"
         component={DashboardScreen}
         options={({ navigation }) => ({
-          tabBarIcon: ({ color }) => <FontAwesomeIcon icon={faHome} size={30} color={"#ff2324"} />,
-          title: 'Dashboard',
-          headerTitleAlign: 'center',
+          tabBarIcon: ({ color }) => (
+            <FontAwesomeIcon icon={faHome} size={30} color={"#ff2324"} />
+          ),
+          title: "Dashboard",
+          headerTitleAlign: "center",
           headerLeft: () => (
-            <Pressable ml={3}
-              onPress={() => navigation.navigate('Profile')}
+            <Pressable
+              ml={3}
+              onPress={() => navigation.navigate("Profile")}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
-              })}>
-              <FontAwesomeIcon icon={faUserCircle} size={25} color={colors.text} />
+              })}
+            >
+              <FontAwesomeIcon
+                icon={faUserCircle}
+                size={25}
+                color={colors.text}
+              />
             </Pressable>
           ),
           headerRight: () => (
-            <Pressable mr={3}
-              onPress={() => navigation.navigate('About')}
+            <Pressable
+              mr={3}
+              onPress={() => navigation.navigate("About")}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
-              })}>
-              <FontAwesomeIcon icon={faInfoCircle} size={25} color={colors.text} />
+              })}
+            >
+              <FontAwesomeIcon
+                icon={faInfoCircle}
+                size={25}
+                color={colors.text}
+              />
             </Pressable>
           ),
         })}
@@ -123,9 +162,11 @@ function BottomTabNavigator() {
         name="MoodTracker"
         component={MoodTrackerScreen}
         options={({ navigation }) => ({
-          title: 'Mood Tracker',
-          tabBarIcon: ({ color }) => <FontAwesomeIcon icon={faSmile} size={30} color={color} />,
-          headerTitleAlign: 'center',
+          title: "Mood Tracker",
+          tabBarIcon: ({ color }) => (
+            <FontAwesomeIcon icon={faSmile} size={30} color={color} />
+          ),
+          headerTitleAlign: "center",
           headerShown: false,
         })}
       />
@@ -133,9 +174,11 @@ function BottomTabNavigator() {
         name="Journal"
         component={JournalScreen}
         options={{
-          title: 'Journal',
-          tabBarIcon: ({ color }) => <FontAwesomeIcon icon={faCalendar} size={30} color={color} />,
-          headerTitleAlign: 'center',
+          title: "Journal",
+          tabBarIcon: ({ color }) => (
+            <FontAwesomeIcon icon={faCalendar} size={30} color={color} />
+          ),
+          headerTitleAlign: "center",
           headerTransparent: true,
           headerShown: false,
         }}
@@ -143,12 +186,15 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="ThoughtDiary"
         component={ThoughtDiaryScreen}
-        options={{
-          title: 'Thought Diary',
-          tabBarIcon: ({ color }) => <FontAwesomeIcon icon={faBrain} size={30} color={color} />, // TODO: Change icon
-          headerTitleAlign: 'center',
+        options={({ navigation }) => ({
+          title: "Thought Diary",
+          tabBarIcon: ({ color }) => (
+            <FontAwesomeIcon icon={faBrain} size={30} color={color} />
+          ), // TODO: Change icon
+          headerTitleAlign: "center",
           headerTransparent: true,
-        }} />
+        })}
+      />
     </BottomTab.Navigator>
   );
 }
