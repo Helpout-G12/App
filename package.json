@@ -4,7 +4,8 @@
   "main": "AppEntry.js",
   "scripts": {
     "prestart": "node pick-ip.js",
-    "start": "env-cmd -f .env -f .ip expo start",
+    "start": "env-cmd -f .env env-cmd -f .ip expo start",
+    "print-env": "env-cmd node print-env.js",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
@@ -29,7 +30,7 @@
     "native-base": "^3.4.25",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "react-native": "0.70.5",
+    "react-native": "0.70.8",
     "react-native-calendars": "^1.1275.0",
     "react-native-gesture-handler": "~2.8.0",
     "react-native-reanimated": "~2.12.0",
