@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "AppEntry.js",
   "scripts": {
-    "prestart": "node pick-ip.js",
-    "start": "env-cmd -f .env env-cmd -f .ip expo start",
+    "start": "env-cmd expo start",
     "print-env": "env-cmd node print-env.js",
     "android": "expo start --android",
     "ios": "expo start --ios",

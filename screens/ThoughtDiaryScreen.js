@@ -4,8 +4,6 @@ import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ThoughtScreen from "./ThoughtScreen";
-import Navigation from "../navigation";
-import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 
 export default function ThoughtDiaryScreen({ navigation }) {
