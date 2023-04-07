@@ -36,7 +36,7 @@ function getIP() {
 
 module.exports = (async () => {
   return {
-    GENERATE_SOURCEMAP: false,
+    // GENERATE_SOURCEMAP: false,
     REACT_NATIVE_PACKAGER_HOSTNAME: await getIP(),
   }
 })();
