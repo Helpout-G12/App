@@ -30,7 +30,7 @@ export default function MoodTrackerScreen({ navigation }) {
         .then((res) => res.json())
         .then((data) => setMoods(data))
         .catch((err) => console.log(err));
-    }, 5000);
+    }, 10000);
   }, []);
 
   useEffect(() => {
@@ -94,14 +94,23 @@ export default function MoodTrackerScreen({ navigation }) {
         </View>
 
         <Calendar initialDate={new Date().toDateString()}
-
-          markingType={'period'}
-        // markedDates={{
-        //   '2021-06-16': {startingDay: true, color: 'blue'},
-        //   '2021-06-17': {color: 'blue'},
-        // }}
-        // set marked dates as selected dates with color from mood
-
+          markedDates={{
+            // sum the score of all moods on a day and color the day accordingly
+            [today]: { selected: true, selectedColor: colors.primary },
+            ...moods.reduce((acc, mood) => {
+              const date = moment(mood.time).format("YYYY-MM-DD");
+              if (acc[date]) {
+                if (acc[date].score) {
+                  acc[date].score += mood.score;
+                } else {
+                  acc[date].score = mood.score;
+                }
+              } else {
+                acc[date] = { score: mood.score };
+              }
+              return acc;
+            }, {}),
+          }}
         />
         <View>
           <Heading ml={4} mt={4} mb={2} color={colors.text}>
