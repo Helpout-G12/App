@@ -36,7 +36,10 @@ const Selectmood = ({ open, close, setMood }) => {
           </Flex>
           <Button width="90%" mx={"auto"} mb={4}
             onPress={() => {
-              setMood(selectedEmotion);
+              setMood({
+                ...selectedEmotion,
+                time: new Date(),
+              })
               close();
             }} >
             <Text fontSize="lg" color="white">

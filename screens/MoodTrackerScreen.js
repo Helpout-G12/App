@@ -20,11 +20,17 @@ export default function MoodTrackerScreen({ navigation }) {
   const [moods, setMoods] = useState([]);
 
   useEffect(() => {
-    // get moods from db
     fetch("https://lokeshc2.me/moods")
       .then((res) => res.json())
       .then((data) => setMoods(data))
       .catch((err) => console.log(err));
+
+    setInterval(() => {
+      fetch("https://lokeshc2.me/moods")
+        .then((res) => res.json())
+        .then((data) => setMoods(data))
+        .catch((err) => console.log(err));
+    }, 5000);
   }, []);
 
   useEffect(() => {
@@ -76,8 +82,8 @@ export default function MoodTrackerScreen({ navigation }) {
             <FontAwesomeIcon icon={mood.icon} size={50} color={mood.color} style={{ alignSelf: "center" }} />
             <Center>
               <Text fontSize="xl" ml={4} fontWeight="bold" color={colors.text}>
-              You're feeling {mood.text}
-            </Text>
+                You're feeling {mood.text}
+              </Text>
             </Center>
           </>}
           <Button width="90%" mx={"auto"} mb={4} onPress={() => setMoodSelectorOpen(true)}>
@@ -120,7 +126,7 @@ export default function MoodTrackerScreen({ navigation }) {
                     {mood.text}
                   </Text>
                   <Text fontSize="sm" color={colors.text}>
-                    {mood.date}
+                    {mood.time}
                   </Text>
                 </Box>
               ))}
