@@ -33,7 +33,8 @@ import { faSmile } from "@fortawesome/free-regular-svg-icons/faSmile";
 import { faCalendar } from "@fortawesome/free-regular-svg-icons/faCalendar";
 import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons/faInfoCircle";
-import { faBrain } from "@fortawesome/free-solid-svg-icons";
+import { faComment } from "@fortawesome/free-solid-svg-icons/faComment";
+import ChatScreen from "../screens/ChatScreen";
 
 // Components
 
@@ -193,6 +194,17 @@ function BottomTabNavigator() {
           ), // TODO: Change icon
           headerTitleAlign: "center",
           headerTransparent: true,
+        })}
+      />
+      <BottomTab.Screen
+        name="Chat"
+        component={ChatScreen}
+        options={({ navigation }) => ({
+          title: "Chat",
+          tabBarIcon: ({ color }) => (
+            <FontAwesomeIcon icon={faComment} size={30} color={color} />
+          ),
+          headerShown: false,
         })}
       />
     </BottomTab.Navigator>
