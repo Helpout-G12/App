@@ -1,84 +1,79 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Container, Content, Input, Button } from 'native-base';
-import { useColorScheme } from 'react-native-appearance';
-
-const ChatScreen = () => {
-  const [messages, setMessages] = useState([]);
+import { StyleSheet } from 'react-native';
+import { View, Text, Flex, Input, Button, ScrollView } from 'native-base';
+import { useColors } from '../hooks/useColors';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faComment } from '@fortawesome/free-regular-svg-icons/faComment';
+export default function Chat({ navigation }) {
+  const [messages, setMessages] = useState([
+    { text: 'Hello', sender: 'me', time: new Date('2021-01-01 12:00:00') },
+    { text: 'Hi', sender: 'other', time: new Date('2021-01-01 12:00:01') },
+    { text: 'How are you?', sender: 'me', time: new Date('2021-01-01 12:00:02') },
+    { text: 'I am fine, thanks', sender: 'other', time: new Date('2021-01-01 12:00:03') },
+    { text: 'What about you?', sender: 'me', time: new Date('2021-01-01 12:00:04') },
+    { text: 'I am good', sender: 'other', time: new Date('2021-01-01 12:00:05') },
+    { text: 'Nice to hear that', sender: 'me', time: new Date('2021-01-01 12:00:06') },
+    { text: 'Bye', sender: 'me', time: new Date('2021-01-01 12:00:07') }
+  ]);
   const [inputText, setInputText] = useState('');
-  const colorScheme = useColorScheme();
-  const color = {
-    background: colorScheme === 'light' ? 'white' : 'black',
-    primary: '#007bff',
-    text: colorScheme === 'light' ? 'black' : 'white'
-  };
+  const color = useColors();
 
   const handleSend = () => {
     if (inputText !== '') {
-      setMessages([...messages, { text: inputText, sender: 'me' }]);
+      setMessages([...messages, { text: inputText, sender: 'me', time: new Date() }]);
       setInputText('');
     }
   };
 
   return (
-    <Container style={{ backgroundColor: color.background }}>
-      <Content>
-        <View style={styles.chatContainer}>
-          {messages.map((message, index) => (
-            <View
-              key={index}
-              style={[
-                styles.messageContainer,
-                message.sender === 'me'
-                  ? styles.rightMessage
-                  : styles.leftMessage
-              ]}
-            >
-              <Text style={{ color: color.text }}>{message.text}</Text>
+    <SafeAreaView>
+      <Flex h='full' bg={color.background} justifyContent={'flex-end'} _web={{ h: '95vh' }}>
+        <Flex bg={color.background} flexDir={'column'} p={3}>
+          <ScrollView flexDir={'column-reverse'}>
+            {!messages.length && (
+              <View flex={1} justifyContent={'center'} alignItems={'center'}>
+                <FontAwesomeIcon icon={faComment} size={100} color={color.text} />
+                <Text color={color.text} fontSize={'xl'}>Start a conversation</Text>
+              </View>
+            )}
+
+            {messages.map((message, index) => (
+              <View
+                key={index}
+                flex={1}
+                m={1}
+              >
+                <View
+                  key={index}
+                  p={1}
+                  borderRadius={5}
+                  bg={message.sender === 'me' ? color.primary : color.secondary}
+                  alignSelf={message.sender === 'me' ? 'flex-end' : 'flex-start'}
+                >
+                  <Text flexWrap={'wrap'} maxW={'100%'} color={color.text}>{message.text}</Text>
+                </View>
+              </View>
+            ))}
+            <View flexDirection="row" alignItems="center" justifyContent="space-between" p={1}>
+              <Input
+                placeholder="Type your message"
+                onChangeText={text => setInputText(text)}
+                value={inputText}
+                multiline={true}
+                
+                flex={4}
+                color={color.text}
+                placeholderTextColor={color.text}
+                bg={"#F5F5F5"}
+              />
+              <Button flex={1} onPress={handleSend} ml={2} bg={color.primary} borderColor={color.primary} borderWidth={2}>
+                <Text style={{ color: color.text }}>Send</Text>
+              </Button>
             </View>
-          ))}
-        </View>
-        <View style={styles.inputContainer}>
-          <Input
-            style={{ color: color.text }}
-            placeholder="Type your message"
-            placeholderTextColor={color.text}
-            value={inputText}
-            onChangeText={text => setInputText(text)}
-          />
-          <Button onPress={handleSend} style={{ backgroundColor: color.primary }}>
-            <Text style={{ color: color.text }}>Send</Text>
-          </Button>
-        </View>
-      </Content>
-    </Container>
+          </ScrollView>
+        </Flex>
+      </Flex>
+    </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  chatContainer: {
-    padding: 10
-  },
-  messageContainer: {
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 10,
-    maxWidth: '80%'
-  },
-  leftMessage: {
-    backgroundColor: '#e1e1e1',
-    alignSelf: 'flex-start'
-  },
-  rightMessage: {
-    backgroundColor: '#007bff',
-    alignSelf: 'flex-end'
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 10
-  }
-});
-
-export default ChatScreen;

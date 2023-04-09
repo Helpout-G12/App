@@ -26,6 +26,7 @@ import MoodTrackerScreen from "../screens/MoodTrackerScreen";
 import JournalScreen from "../screens/JournalScreen";
 import ThoughtDiaryScreen from "../screens/ThoughtDiaryScreen";
 import ThoughtScreen from "../screens/ThoughtScreen";
+import ChatScreen from "../screens/ChatScreen";
 //Icons
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons/faHome";
@@ -33,8 +34,8 @@ import { faSmile } from "@fortawesome/free-regular-svg-icons/faSmile";
 import { faCalendar } from "@fortawesome/free-regular-svg-icons/faCalendar";
 import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons/faInfoCircle";
+import { faBrain } from "@fortawesome/free-solid-svg-icons/faBrain";
 import { faComment } from "@fortawesome/free-solid-svg-icons/faComment";
-import ChatScreen from "../screens/ChatScreen";
 
 // Components
 
@@ -109,7 +110,7 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="MoodTracker"
+      initialRouteName="Chat"
       screenOptions={{
         headerTransparent: true,
         headerTitleStyle: { color: colors.text },
