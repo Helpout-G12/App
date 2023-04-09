@@ -41,6 +41,11 @@ const linking = {
               ThoughtDiaryScreen: 'thought-diary',
             },
           },
+          Chat: {
+            screens: {
+              ChatScreen: 'chat',
+            },
+          }
         },
       },
     },

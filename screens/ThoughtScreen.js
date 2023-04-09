@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#777",
     paddingTop: 4,
     paddingBottom: 4,
-    outline: "none",
+    // outline: "none",
     color: "#0d0c22",
   },
   text: {
