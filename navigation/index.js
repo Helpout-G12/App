@@ -23,7 +23,7 @@ import Login from "../screens/LoginScreen";
 
 import DashboardScreen from "../screens/DashboardScreen";
 import MoodTrackerScreen from "../screens/MoodTrackerScreen";
-import JournalScreen from "../screens/JournalScreen";
+import JournalScreen from "../screens/PromptedJournalScreen";
 import ThoughtDiaryScreen from "../screens/ThoughtDiaryNew";
 import ThoughtScreen from "../screens/ThoughtScreen";
 import ChatScreen from "../screens/ChatScreen";

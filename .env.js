@@ -38,6 +38,6 @@ module.exports = (async () => {
   return {
     // GENERATE_SOURCEMAP: false,
     REACT_NATIVE_PACKAGER_HOSTNAME: await getIP(),
-    BACKEND_URL: 'http://lokeshc2.me',
+    REACT_APP_API_URI: 'https://lokeshc2.me',
   }
 })();

@@ -1,17 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
-import TextForm from "./TextForm";
-import NumberForm from "./NumberForm";
-import DateForm from "./DateForm";
-import TimeForm from "./TimeForm";
-import ThoughtsFormData from "../../constants/ThoughtsFormData";
-import { View, Text, FormControl, Button, Container, Progress, ScrollView, VStack } from 'native-base';
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { View, Text, FormControl, Button, Flex, Progress, ScrollView, VStack, Input } from 'native-base';
 import { useColors } from "../../hooks/useColors";
-import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function ThoughtForm({ currentThought, setter, setEditMode }) {
+export default function ThoughtForm({ currentThought, setEditMode }) {
   const color = useColors()
-  const [formStep, setFormStep] = useState(1);
+  const [datePickerVisible, setDatePickerVisible] = useState(false);
+
   const [dateTime, setDateTime] = useState(currentThought?.date || new Date())
   const [situation, setSituation] = useState(currentThought?.situation || "")
   const [thought, setThought] = useState(currentThought?.thought || "")
@@ -54,105 +50,131 @@ export default function ThoughtForm({ currentThought, setter, setEditMode }) {
     }).then((res) => res.json());
   };
 
-  const handleFormType = (type) => {
-    switch (type) {
-      case "text":
-        return (
-          <TextForm
-            questionText={ThoughtsFormData[formStep - 1].questionText}
-            placeholderText={ThoughtsFormData[formStep - 1].placeholderText}
-            onChange={onChange}
-            input={input}
-          />
-        );
-      case "number":
-        return (
-          <NumberForm
-            questionText={ThoughtsFormData[formStep - 1].questionText}
-            placeholderText={ThoughtsFormData[formStep - 1].placeholderText}
-            onChange={onChange}
-            input={input}
-          />
-        );
-      case "date":
-        return (
-          <DateForm
-            questionText={ThoughtsFormData[formStep - 1].questionText}
-            placeholderText={ThoughtsFormData[formStep - 1].placeholderText}
-            onChange={onChange}
-            input={input}
-          />
-        );
-      case "time":
-        return (
-          <TimeForm
-            questionText={ThoughtsFormData[formStep - 1].questionText}
-            placeholderText={ThoughtsFormData[formStep - 1].placeholderText}
-            onChange={onChange}
-            input={input}
-          />
-        );
-      default:
-        return <Text>Incorrect form type</Text>;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formCompleted && currentThought) {
+      updateThought();
+      setEditMode(false);
+    } else if (formCompleted) {
+      postNewThought();
+      setEditMode(false);
+    } else {
+      alert("Please complete the form");
     }
   };
 
   return (
-    <SafeAreaView>
+    <>
       <Flex basis={{ base: "100%", md: "50%" }} p={5} bg={'coolGray.50'} borderRadius={10} shadow={5}>
         <ScrollView>
           <VStack space={5}>
-            <FormControl onSubmit={handleSubmit}>
-              {handleFormType(ThoughtsFormData[formStep - 1].type)}
-              <Text className="text-start mb-1">{`Step ${formStep} of ${ThoughtsFormData.length}`}</Text>
-              <Progress value={currentProgress} mb={5} bg={'coolGray.300'} _filledTrack={color.primary} />
-              <View aria-label="Button group for navigating new thought form">
-                {/* Hide the previous button if rendering the first form step */}
-                {formStep !== 1 && (
-                  <Button
-                    className="me-1 shadow-none"
-                    id="form-button-previous"
-                    variant="outline-secondary"
-                    onClick={(e) => {
-                      handleChange();
-                      previousStep(e);
-                    }}
-                  >
-                    Previous
-                  </Button>
-                )}
-                {/* Hide the next button if rendering the last form step */}
-                {ThoughtsFormData.length !== formStep ? (
-                  <Button
-                    className="shadow-none"
-                    id="form-button-next"
-                    variant="outline-primary"
-                    onClick={(e) => {
-                      handleChange();
-                      nextStep(e);
-                    }}
-                  >
-                    Next
-                  </Button>
-                ) : (
-                  <Button
-                    variant="success"
-                    type="submit"
-                    id="form-button-submit"
-                    className="shadow-none"
-                  >
-                    {currentThought ? "Update" : "Submit"}
-                  </Button>
-                )}
-              </View>
+            <FormControl>
+              <FormControl.Label>
+                <Text>When did this thought occur?</Text>
+              </FormControl.Label>
+              <Button onPress={() => setDatePickerVisible(true)} textAlign={"left"}>{dateTime.toDateString() || "Pick a date"}</Button>
+              {datePickerVisible && <DateTimePicker
+                onChange={(e, selectedDate) => { e.type === 'set' && setDateTime(selectedDate); setDatePickerVisible(false) }}
+                value={dateTime || new Date()}
+              />}
             </FormControl>
+            <FormControl>
+              <FormControl.Label>
+                <Text>What was the thought?</Text>
+              </FormControl.Label>
+              <Input
+                value={thought}
+                onChangeText={(text) => setThought(text)}
+                placeholder="Thought"
+              />
+            </FormControl>
+            <FormControl>
+              <FormControl.Label>
+                <Text>What was the situation?</Text>
+              </FormControl.Label>
+              <Input
+                value={situation}
+                onChangeText={(text) => setSituation(text)}
+                placeholder="Situation"
+              />
+            </FormControl>
+            <FormControl>
+              <FormControl.Label>
+                <Text>How true do you think this thought is?</Text>
+              </FormControl.Label>
+              <Input
+                value={thoughtRating}
+                onChangeText={(text) => setThoughtRating(text)}
+                placeholder="Thought Rating"
+              />
+
+            </FormControl>
+            <FormControl>
+              <FormControl.Label>
+                <Text>What was your strongest emotion?</Text>
+              </FormControl.Label>
+              <Input
+                value={emotions}
+                onChangeText={(text) => setEmotions(text)}
+                placeholder="Emotions"
+              />
+            </FormControl>
+            <FormControl>
+              <FormControl.Label>
+                <Text>What behaviours did this thought trigger?</Text>
+              </FormControl.Label>
+              <Input
+                value={behaviours}
+                onChangeText={(text) => setBehaviours(text)}
+                placeholder="Behaviours"
+              />
+            </FormControl>
+            <FormControl>
+              <FormControl.Label>
+                <Text>What evidence is there that your thought is true?</Text>
+              </FormControl.Label>
+              <Input
+                value={evidenceFor}
+                onChangeText={(text) => setEvidenceFor(text)}
+                placeholder="Evidence For"
+              />
+            </FormControl>
+            <FormControl>
+              <FormControl.Label>
+                <Text>What evidence is there that your thought is false?</Text>
+              </FormControl.Label>
+              <Input
+                value={evidenceAgainst}
+                onChangeText={(text) => setEvidenceAgainst(text)}
+                placeholder="Evidence Against"
+              />
+            </FormControl>
+            <FormControl>
+              <FormControl.Label>
+                <Text>Weighing the evidence for and against, what is a more balanced thought?</Text>
+              </FormControl.Label>
+              <Input
+                value={balancedThought}
+                onChangeText={(text) => setBalancedThought(text)}
+                placeholder="Balanced Thought"
+              />
+            </FormControl>
+            <FormControl>
+              <FormControl.Label>
+                <Text>How true do you think this new balanced thought is?</Text>
+              </FormControl.Label>
+              <Input
+                value={balancedRating}
+                onChangeText={(text) => setBalancedRating(text)}
+                placeholder="Balanced Rating"
+              />
+            </FormControl>
+            <Button onPress={handleSubmit}>
+              <Text>Submit</Text>
+            </Button>
           </VStack>
         </ScrollView>
-      </Flex>
-      <Text>
-        Click <a href="/newThought">here</a> to log another thought, or
-        click <a href="/diary">here</a> to view your diary
-      </Text>
-    </SafeAreaView>
+      </Flex >
+    </>
   );
 };
