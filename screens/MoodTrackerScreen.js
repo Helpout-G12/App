@@ -23,14 +23,14 @@ export default function MoodTrackerScreen({ navigation }) {
     fetch("https://lokeshc2.me/moods")
       .then((res) => res.json())
       .then((data) => setMoods(data))
-      .catch((err) => console.log(err, "MoodTracker_24"));
+      .catch((err) => console.log(err, "MoodTracker_26"));
 
-    setInterval(() => {
-      fetch("https://lokeshc2.me/moods")
-        .then((res) => res.json())
-        .then((data) => setMoods(data))
-        .catch((err) => console.log(err, "MoodTracker_30"));
-    }, 10000);
+    // setInterval(() => {
+    //   fetch("https://lokeshc2.me/moods")
+    //     .then((res) => res.json())
+    //     .then((data) => setMoods(data))
+    //     .catch((err) => console.log(err, "MoodTracker_32"));
+    // }, 10000);
   }, []);
 
   useEffect(() => {

@@ -110,7 +110,7 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="ThoughtDiary"
+      initialRouteName="Journal"
       screenOptions={{
         headerTransparent: true,
         headerTitleStyle: { color: colors.text },

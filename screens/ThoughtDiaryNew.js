@@ -42,13 +42,13 @@ export default function ThoughtDiary({ navigation }) {
     fetch(`${process.env.REACT_APP_API_URI}/thoughts`)
       .then((res) => res.json())
       .then((data) => setThoughts(data))
-      .catch((err) => console.warn(err))
+      .catch((err) => console.warn(err, "td46"))
   }, [])
 
   return (
     <SafeAreaView>
       {editMode ? (
-        <ThoughtForm props={{ currentThought, setCurrentThought, setEditMode }} />
+        <ThoughtForm currentThought={currentThought} setEditMode={setEditMode} />
       ) : (
         <Box alignItems="center">
           <Button m={1} onPress={() => setEditMode(true) && setCurrentThought(null)}>New Thought</Button>

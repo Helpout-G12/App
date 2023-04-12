@@ -8,6 +8,8 @@ export default function ThoughtForm({ currentThought, setEditMode }) {
   const color = useColors()
   const [datePickerVisible, setDatePickerVisible] = useState(false);
 
+  console.warn(currentThought, "td79")
+
   const [dateTime, setDateTime] = useState(currentThought?.date || new Date())
   const [situation, setSituation] = useState(currentThought?.situation || "")
   const [thought, setThought] = useState(currentThought?.thought || "")
