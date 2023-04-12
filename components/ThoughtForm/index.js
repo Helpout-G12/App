@@ -8,18 +8,16 @@ export default function ThoughtForm({ currentThought, setEditMode }) {
   const color = useColors()
   const [datePickerVisible, setDatePickerVisible] = useState(false);
 
-  console.warn(currentThought, "td79")
-
   const [dateTime, setDateTime] = useState(currentThought?.date || new Date())
   const [situation, setSituation] = useState(currentThought?.situation || "")
   const [thought, setThought] = useState(currentThought?.thought || "")
-  const [thoughtRating, setThoughtRating] = useState(currentThought?.thought_rating || 0)
+  const [thoughtRating, setThoughtRating] = useState(currentThought?.thought_rating || '0')
   const [emotions, setEmotions] = useState(currentThought?.emotions || "")
   const [behaviours, setBehaviours] = useState(currentThought?.behaviours || "")
   const [evidenceFor, setEvidenceFor] = useState(currentThought?.evidence_for || "")
   const [evidenceAgainst, setEvidenceAgainst] = useState(currentThought?.evidence_against || "")
   const [balancedThought, setBalancedThought] = useState(currentThought?.balanced_thought || "")
-  const [balancedRating, setBalancedRating] = useState(currentThought?.balanced_rating || 0)
+  const [balancedRating, setBalancedRating] = useState(currentThought?.balanced_rating || '0')
 
   const formCompleted = thought && situation && dateTime && thoughtRating && emotions && behaviours && evidenceFor && evidenceAgainst && balancedThought && balancedRating
 
