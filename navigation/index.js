@@ -207,17 +207,6 @@ function BottomTabNavigator() {
           headerShown: false,
         })}
       />
-      <BottomTab.Screen
-        name="Chat"
-        component={ChatScreen}
-        options={({ navigation }) => ({
-          title: "Chat",
-          tabBarIcon: ({ color }) => (
-            <FontAwesomeIcon icon={faComment} size={30} color={color} />
-          ),
-          headerShown: false,
-        })}
-      />
     </BottomTab.Navigator>
   );
 }
