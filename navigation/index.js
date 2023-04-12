@@ -23,8 +23,8 @@ import Login from "../screens/LoginScreen";
 
 import DashboardScreen from "../screens/DashboardScreen";
 import MoodTrackerScreen from "../screens/MoodTrackerScreen";
-import JournalScreen from "../screens/JournalScreen";
-import ThoughtDiaryScreen from "../screens/ThoughtDiaryScreen";
+import JournalScreen from "../screens/PromptedJournalScreen";
+import ThoughtDiaryScreen from "../screens/ThoughtDiaryNew";
 import ThoughtScreen from "../screens/ThoughtScreen";
 import ChatScreen from "../screens/ChatScreen";
 //Icons
@@ -110,7 +110,7 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="Chat"
+      initialRouteName="Journal"
       screenOptions={{
         headerTransparent: true,
         headerTitleStyle: { color: colors.text },
@@ -193,8 +193,18 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => (
             <FontAwesomeIcon icon={faBrain} size={30} color={color} />
           ), // TODO: Change icon
-          headerTitleAlign: "center",
-          headerTransparent: true,
+          headerShown: false
+        })}
+      />
+      <BottomTab.Screen
+        name="Chat"
+        component={ChatScreen}
+        options={({ navigation }) => ({
+          title: "Chat",
+          tabBarIcon: ({ color }) => (
+            <FontAwesomeIcon icon={faComment} size={30} color={color} />
+          ),
+          headerShown: false,
         })}
       />
       <BottomTab.Screen

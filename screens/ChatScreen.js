@@ -61,14 +61,23 @@ export default function Chat({ navigation }) {
                 onChangeText={text => setInputText(text)}
                 value={inputText}
                 multiline={true}
-                
+                onKeyPress={e => e.key === 'Enter' && !e.shiftKey && handleSend()}
+
                 flex={4}
                 color={color.text}
                 placeholderTextColor={color.text}
                 bg={"#F5F5F5"}
               />
-              <Button flex={1} onPress={handleSend} ml={2} bg={color.primary} borderColor={color.primary} borderWidth={2}>
-                <Text style={{ color: color.text }}>Send</Text>
+              <Button
+                flex={1}
+                ml={2}
+                bg={color.primary}
+                borderWidth={2}
+                borderColor={color.primary}
+                onPress={handleSend}
+                _text={{ color: color.text }}
+              >
+                Send
               </Button>
             </View>
           </ScrollView>

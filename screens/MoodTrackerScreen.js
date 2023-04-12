@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 
 import bg1 from "../assets/images/bg1.png";
-import { Calendar } from "react-native-calendars";
 
 import Selectmood from "../components/selectmood";
 
@@ -13,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 export default function MoodTrackerScreen({ navigation }) {
   const colors = useColors();
+
   const today = new Date().toDateString();
 
   const [moodSelectorOpen, setMoodSelectorOpen] = useState(false);
@@ -23,14 +23,14 @@ export default function MoodTrackerScreen({ navigation }) {
     fetch("https://lokeshc2.me/moods")
       .then((res) => res.json())
       .then((data) => setMoods(data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err, "MoodTracker_26"));
 
-    setInterval(() => {
-      fetch("https://lokeshc2.me/moods")
-        .then((res) => res.json())
-        .then((data) => setMoods(data))
-        .catch((err) => console.log(err));
-    }, 10000);
+    // setInterval(() => {
+    //   fetch("https://lokeshc2.me/moods")
+    //     .then((res) => res.json())
+    //     .then((data) => setMoods(data))
+    //     .catch((err) => console.log(err, "MoodTracker_32"));
+    // }, 10000);
   }, []);
 
   useEffect(() => {
@@ -52,6 +52,7 @@ export default function MoodTrackerScreen({ navigation }) {
         .then((data) => {
           console.log(data);
         })
+        .catch((err) => console.log(err, "MoodTracker_53"));
     }
   }, [mood]);
 
@@ -92,26 +93,6 @@ export default function MoodTrackerScreen({ navigation }) {
             </Text>
           </Button>
         </View>
-
-        <Calendar initialDate={new Date().toDateString()}
-          markedDates={{
-            // sum the score of all moods on a day and color the day accordingly
-            [today]: { selected: true, selectedColor: colors.primary },
-            ...moods.reduce((acc, mood) => {
-              const date = moment(mood.time).format("YYYY-MM-DD");
-              if (acc[date]) {
-                if (acc[date].score) {
-                  acc[date].score += mood.score;
-                } else {
-                  acc[date].score = mood.score;
-                }
-              } else {
-                acc[date] = { score: mood.score };
-              }
-              return acc;
-            }, {}),
-          }}
-        />
         <View>
           <Heading ml={4} mt={4} mb={2} color={colors.text}>
             Your Moods
