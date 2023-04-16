@@ -27,7 +27,7 @@ export default function Chat({ navigation }) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ prompt: text + '->' })
+      body: JSON.stringify({ prompt: text })
     }).then(res => res.json())
       .then(data => setMessages([...messages, { text: data.text, sender: 'other', time: new Date() }]))
       .catch(console.warn)
