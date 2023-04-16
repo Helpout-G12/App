@@ -32,7 +32,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons/faHome";
 import { faSmile } from "@fortawesome/free-regular-svg-icons/faSmile";
 import { faCalendar } from "@fortawesome/free-regular-svg-icons/faCalendar";
-import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
+import { faUserCircle } from "@fortawesome/free-regular-svg-icons/faUserCircle";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons/faInfoCircle";
 import { faBrain } from "@fortawesome/free-solid-svg-icons/faBrain";
 import { faComment } from "@fortawesome/free-solid-svg-icons/faComment";

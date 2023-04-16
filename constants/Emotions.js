@@ -1,17 +1,15 @@
-import {
-  faFaceAngry,
-  faFaceFlushed,
-  faFaceFrown,
-  faFaceGrin,
-  faFaceKiss,
-  faFaceLaugh,
-  faFaceMeh,
-  faFaceSadTear,
-  faFaceSmile,
-  faFaceSmileWink,
-  faFaceDizzy,
-  faFaceSurprise
-} from "@fortawesome/free-regular-svg-icons";
+import { faFaceAngry } from "@fortawesome/free-regular-svg-icons/faFaceAngry";
+import { faFaceFlushed } from "@fortawesome/free-regular-svg-icons/faFaceFlushed";
+import { faFaceFrown } from "@fortawesome/free-regular-svg-icons/faFaceFrown";
+import { faFaceGrin } from "@fortawesome/free-regular-svg-icons/faFaceGrin";
+import { faFaceKiss } from "@fortawesome/free-regular-svg-icons/faFaceKiss";
+import { faFaceLaugh } from "@fortawesome/free-regular-svg-icons/faFaceLaugh";
+import { faFaceMeh } from "@fortawesome/free-regular-svg-icons/faFaceMeh";
+import { faFaceSadTear } from "@fortawesome/free-regular-svg-icons/faFaceSadTear";
+import { faFaceSmile } from "@fortawesome/free-regular-svg-icons/faFaceSmile";
+import { faFaceSmileWink } from "@fortawesome/free-regular-svg-icons/faFaceSmileWink";
+import { faFaceDizzy } from "@fortawesome/free-regular-svg-icons/faFaceDizzy";
+import { faFaceSurprise } from "@fortawesome/free-regular-svg-icons/faFaceSurprise";
 
 const emotions = [
   {

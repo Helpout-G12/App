@@ -15,19 +15,20 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-
     "assetBundlePatterns": [
       "**/*"
     ],
     "jsEngine": "hermes",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.helpout.app"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.helpout.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"

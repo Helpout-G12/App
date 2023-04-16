@@ -2,7 +2,7 @@ import { StyleSheet, TextInput } from "react-native";
 import { Modal, View, Text, Button } from "native-base";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { faBorderNone } from "@fortawesome/free-solid-svg-icons";
+import { faBorderNone } from "@fortawesome/free-solid-svg-icons/faBorderNone";
 
 //import styles from "./styles/ThoughtScreen.css";
 const ThoughtRecord = ({ open, hideThoughtRecorder }) => {
