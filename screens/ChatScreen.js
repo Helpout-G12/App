@@ -18,10 +18,26 @@ export default function Chat({ navigation }) {
   ]);
   const [inputText, setInputText] = useState('');
   const color = useColors();
+  const [loading, setLoading] = useState(false);
+
+  const getResponse = (text) => {
+    setLoading(true);
+    fetch(process.env.REACT_APP_API_URI + '/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ prompt: text + '->' })
+    }).then(res => res.json())
+      .then(data => setMessages([...messages, { text: data.text, sender: 'other', time: new Date() }]))
+      .catch(console.warn)
+      .finally(() => setLoading(false));
+  };
 
   const handleSend = () => {
     if (inputText !== '') {
       setMessages([...messages, { text: inputText, sender: 'me', time: new Date() }]);
+      getResponse(inputText);
       setInputText('');
     }
   };
