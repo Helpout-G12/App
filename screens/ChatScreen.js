@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { View, Text, Flex, Input, Button, ScrollView } from 'native-base';
 import { useColors } from '../hooks/useColors';
@@ -7,37 +7,36 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faComment } from '@fortawesome/free-regular-svg-icons/faComment';
 export default function Chat({ navigation }) {
   const [messages, setMessages] = useState([
-    { text: 'Hello', sender: 'me', time: new Date('2021-01-01 12:00:00') },
-    { text: 'Hi', sender: 'other', time: new Date('2021-01-01 12:00:01') },
-    { text: 'How are you?', sender: 'me', time: new Date('2021-01-01 12:00:02') },
-    { text: 'I am fine, thanks', sender: 'other', time: new Date('2021-01-01 12:00:03') },
-    { text: 'What about you?', sender: 'me', time: new Date('2021-01-01 12:00:04') },
-    { text: 'I am good', sender: 'other', time: new Date('2021-01-01 12:00:05') },
-    { text: 'Nice to hear that', sender: 'me', time: new Date('2021-01-01 12:00:06') },
-    { text: 'Bye', sender: 'me', time: new Date('2021-01-01 12:00:07') }
+    { role: "system", content: 'Helpout chatbot is a helpful, patient listener who tries to help patients understand and process their own feelings', time: new Date('2021-01-01 12:00:00') },
+    { role: "assistant", content: "Hi, how're you doing?", time: new Date() }
   ]);
   const [inputText, setInputText] = useState('');
   const color = useColors();
   const [loading, setLoading] = useState(false);
+  const [flag, setFlag] = useState(true)
 
-  const getResponse = (text) => {
+  useEffect(()=>{
+    if (flag) {
+      setFlag(!flag)
+      return
+    }
     setLoading(true);
     fetch('https://lokeshc2.me/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ prompt: text })
+      body: JSON.stringify(messages)
     }).then(res => res.json())
-      .then(data => setMessages([...messages, { text: data.text, sender: 'other', time: new Date() }]))
+      .then(data => setMessages([...messages, { role: "assistant", content: data.text, time: new Date() }]))
       .catch(console.warn)
       .finally(() => setLoading(false));
-  };
+    setFlag(!flag)
+  }, [messages])
 
   const handleSend = () => {
     if (inputText !== '') {
-      setMessages([...messages, { text: inputText, sender: 'me', time: new Date() }]);
-      getResponse(inputText);
+      setMessages([...messages, { role:'user', content: inputText, time: new Date() }]);
       setInputText('');
     }
   };
@@ -54,7 +53,7 @@ export default function Chat({ navigation }) {
               </View>
             )}
 
-            {messages.map((message, index) => (
+            {messages.filter(m=>m.role!='system').map((message, index) => (
               <View
                 key={index}
                 flex={1}
@@ -64,10 +63,10 @@ export default function Chat({ navigation }) {
                   key={index}
                   p={1}
                   borderRadius={5}
-                  bg={message.sender === 'me' ? color.primary : color.secondary}
-                  alignSelf={message.sender === 'me' ? 'flex-end' : 'flex-start'}
+                  bg={message.role=='user' ? color.primary : color.secondary}
+                  alignSelf={message.role=='user' ? 'flex-end' : 'flex-start'}
                 >
-                  <Text flexWrap={'wrap'} maxW={'100%'} color={color.text}>{message.text}</Text>
+                  <Text flexWrap={'wrap'} maxW={'100%'} color={color.text}>{message.content}</Text>
                 </View>
               </View>
             ))}
