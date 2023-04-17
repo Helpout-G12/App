@@ -39,7 +39,7 @@ export default function ThoughtDiary({ navigation }) {
   const [currentThought, setCurrentThought] = useState(null)
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URI}/thoughts`)
+    fetch('https://lokeshc2.me/thoughts')
       .then((res) => res.json())
       .then((data) => setThoughts(data))
       .catch((err) => console.warn(err, "td46"))

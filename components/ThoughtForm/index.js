@@ -35,7 +35,7 @@ export default function ThoughtForm({ currentThought, setEditMode }) {
   }
 
   const postNewThought = async () => {
-    return await fetch(`${process.env.REACT_APP_API_URI}/thoughts`, {
+    return await fetch(`https://lokeshc2.me/thoughts`, {
       headers: { "content-type": "application/json" },
       method: "POST",
       body: JSON.stringify(newThought),
@@ -43,7 +43,7 @@ export default function ThoughtForm({ currentThought, setEditMode }) {
   };
 
   const updateThought = async () => {
-    return await fetch(`${process.env.REACT_APP_API_URI}/thoughts/${currentThought._id}`, {
+    return await fetch(`https://lokeshc2.me/thoughts/${currentThought._id}`, {
       headers: { "content-type": "application/json" },
       method: "PATCH",
       body: JSON.stringify(formData),

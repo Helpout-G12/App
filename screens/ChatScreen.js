@@ -22,7 +22,7 @@ export default function Chat({ navigation }) {
 
   const getResponse = (text) => {
     setLoading(true);
-    fetch(process.env.REACT_APP_API_URI + '/chat', {
+    fetch('https://lokeshc2.me/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
