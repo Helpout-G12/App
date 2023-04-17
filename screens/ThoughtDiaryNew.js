@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Button, FlatList, Box, Stack, Row, Spacer } from 'native-base'
+import { View, Text, Button, FlatList, Flex, Box, Stack, Row, Spacer } from 'native-base'
 import ThoughtForm from '../components/ThoughtForm'
-import { color } from 'react-native-reanimated'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useColors } from '../hooks/useColors'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -9,22 +8,22 @@ import { faPencil } from '@fortawesome/free-solid-svg-icons/faPencil'
 
 
 function ThoughtCard({ thought, edit }) {
+  const color = useColors()
   return (
     //Make a beautiful card here
     <View flex={1} justifyContent="center" alignItems="center">
-      <Box bg={color.background} w="90%" p={4} my={5} rounded="lg">
+      <Flex bg={color.background} w='full' p={3} m={2} rounded="lg">
         <Row justifyContent="space-between">
           <Text fontSize="sm" color={'gray.500'}>{thought.date}</Text>
           <Text fontSize="sm" color={'gray.500'}>{thought.thought_rating}</Text>
         </Row>
         <Row>
-          <Text size={'md'}>{thought.thought}</Text>
+          <Text>{thought.thought}</Text>
         </Row>
-        <Row justifyContent="space-between">
-          <Spacer />
-          <Button leftIcon={<FontAwesomeIcon icon={faPencil} size={'xs'} />} onPress={edit}>Edit</Button>
+        <Row justifyContent="flex-end">
+          <Button leftIcon={<FontAwesomeIcon icon={faPencil} size={10} />} onPress={edit}>Edit</Button>
         </Row>
-      </Box>
+      </Flex>
     </View>
   )
 }
@@ -38,11 +37,13 @@ export default function ThoughtDiary({ navigation }) {
   const [editMode, setEditMode] = useState(false)
   const [currentThought, setCurrentThought] = useState(null)
 
+  const getThoughts = () => fetch('https://lokeshc2.me/thoughts')
+    .then((res) => res.json())
+    .then((data) => setThoughts(data))
+    .catch((err) => console.warn(err, "td46"))
+
   useEffect(() => {
-    fetch('https://lokeshc2.me/thoughts')
-      .then((res) => res.json())
-      .then((data) => setThoughts(data))
-      .catch((err) => console.warn(err, "td46"))
+    getThoughts()
   }, [])
 
   return (
