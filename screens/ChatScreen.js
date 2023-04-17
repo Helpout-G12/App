@@ -28,7 +28,7 @@ export default function Chat({ navigation }) {
       },
       body: JSON.stringify(messages)
     }).then(res => res.json())
-      .then(data => setMessages([...messages, { role: "assistant", content: data.text, time: new Date() }]))
+      .then(data => setMessages([...messages, data]))
       .catch(console.warn)
       .finally(() => setLoading(false));
     setFlag(!flag)
