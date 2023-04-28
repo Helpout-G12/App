@@ -172,7 +172,7 @@ function BottomTabNavigator() {
           headerShown: false,
         })}
       />
-      <BottomTab.Screen
+      {/* <BottomTab.Screen
         name="Journal"
         component={JournalScreen}
         options={{
@@ -184,7 +184,7 @@ function BottomTabNavigator() {
           headerTransparent: true,
           headerShown: false,
         }}
-      />
+      /> */}
       <BottomTab.Screen
         name="ThoughtDiary"
         component={ThoughtDiaryScreen}
