@@ -102,7 +102,7 @@ export default function MoodTrackerScreen({ navigation }) {
               <Text mx={'auto'} color={colors.text}>
                 No moods to show
               </Text>
-              : moods.map((mood, i) => (
+              : moods.reverse().map((mood, i) => (
                 <Box
                   key={i}
                   p={4}
